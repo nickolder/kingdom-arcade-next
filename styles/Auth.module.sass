@@ -1,0 +1,161 @@
+@use 'breakpoints'
+@use 'mixins'
+
+@import 'variables'
+
+.modal_content
+    margin: auto
+    background-color: $auth-bg
+    width: min(25rem, 90%)
+    border-radius: .39rem
+    padding: .68rem
+    z-index: 2
+
+    &_close
+        display: flex
+        justify-content: flex-end
+
+        &_i
+            padding: .14rem 
+            cursor: pointer
+            width: .84rem
+            color: $auth-dark-text
+
+    .auth
+        display: flex
+        flex-direction: column
+        align-items: center
+
+        &_title
+            font-size: 1.12rem
+            font-family: $std-font
+            font-weight: 500
+            color: $auth-title
+            margin: .78rem 0 0
+            letter-spacing: .09rem
+            text-transform: uppercase
+
+        &_user_displayer
+            display: flex
+            gap: .96rem
+            width: 65%
+            padding: .44rem .64rem
+            margin: 1.95rem auto
+            border: .14rem solid $auth-user-displayer-border
+            border-radius: .18rem 
+
+        .picture_input
+            position: relative
+            
+            &_img
+                width: 2.83rem
+                aspect-ratio: 1 / 1
+                position: relative
+                cursor: pointer
+                transition: .1s ease 
+
+                img 
+                    border-radius: 50%
+
+                &:hover
+                    filter: brightness(85%)
+
+                    &+ .add_img
+                        display: block 
+
+            .add_img
+                width: 50%
+                top: 25%
+                left: 25%
+                position: absolute
+                color: $auth-bright-text
+                display: none
+
+        &_user_data
+            display: flex
+            flex-direction: column
+            justify-content: center
+            font-family: $std-font
+            color: $auth-dark-text
+
+            span 
+                font-size: .91rem
+                font-weight: 500
+
+            @include mixins.std-text-overflow(100%)
+
+        &_form
+            display: flex
+            align-items: center
+            flex-direction: column
+            width: 85%
+
+            &_input
+                width: 100%
+                font-family: $alt-font
+                color: $auth-dark-text
+                padding-bottom: .33rem
+                margin-bottom: .73rem
+                background: none
+                border: none
+                border-bottom: .13rem solid $auth-dark-text
+                outline: none
+                width: 90%
+
+            &_password
+                display: flex
+                align-items: bottom
+                justify-content: space-between
+
+                input
+                    background: none
+                    border: none
+                    outline: none
+                    width: 100%
+                    margin-right: .54rem
+                    color: $auth-dark-text
+                    font-family: $alt-font
+                
+                &_img
+                    position: relative
+                    width: 1.15em
+                    padding-right: .43rem 
+                    cursor: pointer
+                    display: flex
+
+            &_submit
+                border-radius: .32rem
+                border: .18rem solid $auth-btn
+                color: $auth-btn
+                background: none
+                width: 85%
+                margin: 2.45rem 0 .85rem
+                padding: .62rem 0
+                font-family: $std-font
+                font-weight: 600
+                font-size: .93rem
+                text-transform: uppercase
+                transition: .1s ease
+
+                &:hover
+                    border-color: lighten($auth-btn, 10%)
+                    color: lighten($auth-btn, 10%)
+                    cursor: pointer
+
+            &_toggle_msg
+                text-align: center
+                color: $auth-dark-text
+                font-family: $alt-font
+                font-weight: 500
+                font-size: .86em
+                margin-bottom: 1.6rem
+
+                .current_msg
+                    color: $auth-title
+                    font-family: $alt-font
+                    cursor: pointer
+                    padding: 0
+                    margin: 0
+
+                    &:hover
+                        color: lighten($auth-title, 10%)

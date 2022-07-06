@@ -1,0 +1,17 @@
+$breakpoints : ('phone' : 480px, 'tablet' : 768px, 'laptop' : 1024px, 'desktop' : 1200px)
+   
+@mixin phone ()
+   @media (max-width: map-get($breakpoints, 'phone'))
+      @content
+
+@mixin tablet ()
+   @media (max-width: map-get($breakpoints, 'tablet'))
+      @content
+
+@mixin laptop ()
+   @media (max-width: map-get($breakpoints, 'laptop'))
+      @content
+
+@mixin desktop ()
+   @media (max-width: map-get($breakpoints, 'desktop'))
+      @content

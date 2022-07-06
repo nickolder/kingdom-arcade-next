@@ -1,0 +1,72 @@
+@use 'breakpoints'
+
+@import 'variables'
+
+.welcome 
+    display: flex
+    flex-direction: row
+    justify-content: center
+    padding: 3.96rem 0
+    gap: 8vw
+    background: $darker-bg-color
+
+    &_info
+        display: flex
+        gap: .84rem
+        justify-content: center
+        flex-direction: column
+
+        h3 
+            margin: 0
+            font-family: $std-font
+            font-size: 1.14em
+            color: $welcome-title
+
+        &_description
+            font-family: $alt-font
+            font-size: .95em
+            color: $welcome-text
+
+            @include breakpoints.tablet 
+                text-align: center
+
+        &_buttons
+            display: flex
+            gap: 1.24rem
+            margin-top: .92rem 
+
+            .hyperlink_button
+                font-family: $alt-font
+                font-size: .92em
+                width: 5.75rem
+                cursor: pointer
+                border: .18em solid $welcome-button
+                border-radius: .43rem
+                padding: .32em 0 
+                background: none
+                color: $welcome-button
+                outline: none
+                transition: .1s ease-in-out
+
+                &:hover
+                    border-color: $welcome-button-hover
+                    color: $welcome-button-hover
+
+            @include breakpoints.tablet 
+                justify-content: center 
+
+    &_divisor
+        border-right: .1rem solid $welcome-divisor
+
+        @include breakpoints.tablet
+            display: none
+
+    &_image
+        position: relative
+        width: 13.38rem
+        aspect-ratio: 1 / 1
+        transform: scaleX(-1)
+        opacity: .7
+
+        @include breakpoints.tablet
+            display: none

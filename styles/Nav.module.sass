@@ -1,0 +1,77 @@
+@use 'breakpoints'
+@import 'variables'
+
+.nav
+    background: none
+    color: $nav-text
+    display: flex
+    justify-content: space-between
+    padding: 0 1.94rem
+    height: 3.62rem
+    font-family: $std-font
+
+    .logo
+        display: flex
+        align-items: center
+        gap: 1.12rem
+        cursor: pointer
+        font-weight: 400
+
+        &_container
+            width: 1.14rem
+            height: 100%
+            position: relative
+
+        span
+            font-size: .88em
+
+            @include breakpoints.tablet
+                display: none
+
+    .buttons 
+        display: flex
+        align-items: center
+        gap: 3rem
+
+        .search_icon
+            display: block
+            cursor: pointer
+            width: .98rem
+            height: 100%
+            position: relative
+
+        &_sign_in
+            background-color: transparent
+            color: $nav-btn
+            border: .13rem solid $nav-btn
+            border-radius: .4rem
+            padding: .43rem 1.14rem
+            text-transform: uppercase
+            font-weight: 600
+            font-size: .78em
+            font-family: $std_font
+            transition: .4s ease
+            cursor: pointer
+
+            &:hover
+                background-color: $nav-btn
+                color: $bg-color
+
+            @include breakpoints.phone
+                display: none
+
+        &_alt_sign_in
+            color: $nav-btn
+            width: 1.2rem
+            display: none
+
+            &:hover
+                cursor: pointer
+                color: darken($nav-btn, 5%)
+
+            @include breakpoints.phone
+                display: block
+
+
+
+

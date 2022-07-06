@@ -1,0 +1,19 @@
+@use 'breakpoints'
+@import 'variables'
+
+.shortcuts
+    display: flex 
+    gap: 5vw
+    align-items: center
+    list-style: none
+
+    @include breakpoints.tablet
+        justify-content: center
+        gap: 12%
+        background-color: $darker-bg-color
+        position: absolute
+        bottom: 0
+        left: 0
+        width: 100%
+        padding: .62rem 0
+        border-top: .01rem solid rgba($nav-text, .2)
