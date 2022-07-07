@@ -5,7 +5,26 @@ import { faCirclePlus } from "@fortawesome/free-solid-svg-icons"
 import auth_style from "../styles/Auth.module.sass"
 
 import Image from "next/image"
-import { useEffect, useRef, useState } from "react"
+import { useRef, useState } from "react"
+
+type UserType = {
+    name: String,
+    username: String,
+    email: String,
+    password: String,
+}
+
+async function registerUser (user: UserType) {
+    const res = await fetch('/api/register', {
+        method: 'POST',
+        body: JSON.stringify(user)
+    })
+
+    if (!res.ok) 
+        throw new Error(res.statusText)
+
+    return await res.json()
+}
 
 const Auth = () => {
 
@@ -14,6 +33,8 @@ const Auth = () => {
 
     const [name, setName] = useState('')
     const [username, setUsername] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
 
     const fileInput = useRef<any>(null)
 
@@ -24,6 +45,10 @@ const Auth = () => {
     function toggleAuth () {
         setIsSignIn(!is_signin)
         setPasswordShown(false)
+    }
+
+    function handleSubmit (e: any) {
+        e.preventDefault()
     }
 
     return (
@@ -45,18 +70,53 @@ const Auth = () => {
 
                     <div className={auth_style.auth_user_data}>
                         <span>{ name === '' ? 'Novo utilizador' : name }</span>
-                        <small>{ username === '' ? '@username' : username }</small>
+                        <small>{ username === '' ? '@username' : '@' + username }</small>
                     </div>
                 </div>
 
-                <form className={auth_style.auth_form}>
-                    { !is_signin ? <input type="text" className={auth_style.auth_form_input} placeholder="Nome" autoComplete="off" onChange={e => setName(e.target.value)} required/> : <></> }
-                    <input type="text" className={auth_style.auth_form_input} placeholder="Username" autoComplete="off" onChange={e => setUsername(e.target.value)} required/>
-                    { !is_signin ? <input type="email" className={auth_style.auth_form_input} placeholder="Email" autoComplete="off" required/> : <></> }
+                <form className={auth_style.auth_form} onSubmit={handleSubmit}>
+
+                    { !is_signin ? 
+                    <input 
+                        type="text" 
+                        className={auth_style.auth_form_input} 
+                        placeholder="Nome" 
+                        autoComplete="off" 
+                        onChange={e => setName(e.target.value)} 
+                        required
+                    /> : <></> }
+
+                    <input 
+                        type="text" 
+                        className={auth_style.auth_form_input} 
+                        placeholder="Username" 
+                        autoComplete="off" 
+                        onChange={e => setUsername(e.target.value)} 
+                        required
+                    />
+                    
+                    { !is_signin ? 
+                    <input 
+                        type="email" 
+                        className={auth_style.auth_form_input} 
+                        placeholder="Email" 
+                        autoComplete="off" 
+                        onChange={e => setEmail(e.target.value)} 
+                        required
+                    /> : <></> }
                 
                     <div className={`${auth_style.auth_form_input} ${auth_style.auth_form_password}`}>
-                        <input type={ !password_shown ? 'password' : 'text'} placeholder="Password" autoComplete="off" required/>
-                        <div className={auth_style.auth_form_password_img} onClick={() => setPasswordShown(!password_shown)}><Image src={`/img/${!password_shown ? 'blind-' : ''}eye-icon.svg`} layout="fill"/></div>
+                        <input 
+                            type={ !password_shown ? 'password' : 'text'} 
+                            placeholder="Password" 
+                            autoComplete="off"
+                            onChange={e => setPassword(e.target.value)} 
+                            required
+                        />
+                        
+                        <div className={auth_style.auth_form_password_img} onClick={() => setPasswordShown(!password_shown)}>
+                            <Image src={`/img/${!password_shown ? 'blind-' : ''}eye-icon.svg`} layout="fill"/>
+                        </div>
                     </div>
 
                     <button className={auth_style.auth_form_submit} type="submit">Submeter</button>

@@ -26,7 +26,7 @@ const ShortcutsDisplayer = () => {
 
     return (
         <div className={shortcuts_style.shortcuts}>
-            { shortcuts.map((shortcut) => <Shortcut shortcut={shortcut} key={shortcuts.indexOf(shortcut)}/>) }
+            { shortcuts.map((shortcut) => <Shortcut {...shortcut} key={shortcuts.indexOf(shortcut)}/>) }
         </div>
     )
 

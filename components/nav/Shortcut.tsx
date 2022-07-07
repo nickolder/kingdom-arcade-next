@@ -3,7 +3,12 @@ import { useContext } from "react"
 
 import shortcut_style from "../../styles/Shortcut.module.sass"
 
-const Shortcut = ({shortcut}: {shortcut: any}) => {
+type ShortcutType = {
+    name: string,
+    path: string,
+}
+
+const Shortcut = (shortcut: ShortcutType) => {
     return (
         <li className={shortcut_style.shortcut}>
             <div className={shortcut_style.shortcut_img}>
