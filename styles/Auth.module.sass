@@ -46,16 +46,18 @@
 
         .picture_input
             position: relative
-            
+
             &_img
                 width: 2.83rem
                 aspect-ratio: 1 / 1
                 position: relative
-                cursor: pointer
                 transition: .1s ease 
 
                 img 
                     border-radius: 50%
+
+            &_img[data-clickable="true"]
+                cursor: pointer
 
                 &:hover
                     filter: brightness(85%)

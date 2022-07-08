@@ -1,4 +1,4 @@
-import React, { useState, createContext, useEffect } from "react"
+import React, { useState, createContext } from "react"
 
 import Image from "next/image"
 
@@ -14,7 +14,9 @@ import Modal from "../Modal"
 
 const Nav = () => {
     const [auth_modal_on, setAuthModalOn] = useState(false)
-    const Auth = require('../Auth').default
+    const Auth = require('../auth/Auth').default
+
+    const ModalContext = createContext(auth_modal_on)
 
     function clickAnywhere (e :any) {
         if (e.target.className === modal_style.modal) {

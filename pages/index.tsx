@@ -1,6 +1,6 @@
-import Meta from '../components/Meta';
-import Nav from '../components/nav/Nav';
-import Welcome from '../components/Welcome';
+import Meta from '../components/Meta'
+import Nav from '../components/nav/Nav'
+import Welcome from '../components/Welcome'
 
 const Home = () => {
   return (

@@ -1,7 +1,18 @@
 import type { NextApiRequest, NextApiResponse } from "next"
-import { PrismaClient } from "@prisma/client"
 
-const prisma = new PrismaClient()
+import { assert, object, string, size, refine } from 'superstruct'
+import isEmail from 'isemail'
+
+import { prisma } from "../../prisma/prisma"
+
+const bcrypt = require('bcrypt')
+
+const Signup = object({
+    name: size(string(), 2, 30),
+    username: size(string(), 2, 20),
+    email: refine(string(), 'email', (v) => isEmail.validate(v)),
+    password: size(string(), 8, 30),
+})
 
 export default async (
     req: NextApiRequest,
@@ -15,9 +26,13 @@ export default async (
     }
 
     const userData = JSON.parse(req.body)
+    assert(userData, Signup)
 
     const registeredUser = await prisma.users.create({
-        data: userData      
+        data: {
+            ...userData,
+            password: await bcrypt.hash(userData.password, 10),
+        }     
     })
 
     res.status(200).json(registeredUser)
