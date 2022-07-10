@@ -1,4 +1,3 @@
-import { useContext } from "react"
 import modal_style from "../styles/Modal.module.sass"
 
 const Modal = ({ModalContent, clickAnywhere}: {ModalContent: any, clickAnywhere :any}) => {

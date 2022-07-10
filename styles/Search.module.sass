@@ -1,0 +1,32 @@
+@import 'variables'
+
+.search
+    display: flex
+    justify-content: center
+    border-bottom: .14rem solid $search-color
+    width: fit-content
+    gap: .84rem
+    padding: .28rem .41rem
+
+    &_icon
+        width: .83rem
+        position: relative
+
+    input
+        background: none
+        border: none
+        color: $search-color
+        font-size: .9em
+        font-family: $std-font
+        letter-spacing: .01rem
+        width: max(15vw, 12.5rem)
+        outline: none
+        
+    &_xmark
+        width: .53rem
+        color: $search-icons
+        opacity: 0
+
+        &[data-isempty="false"]
+            opacity: 1
+            cursor: pointer

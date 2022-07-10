@@ -36,5 +36,4 @@ export default async (
     })
 
     res.status(200).json(registeredUser)
-
 }
