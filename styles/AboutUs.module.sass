@@ -1,0 +1,40 @@
+@use 'mixins'
+@use 'breakpoints'
+@import 'variables'
+
+.page
+    display: flex
+    flex-direction: column
+    gap: 3.32rem
+    align-items: center
+    color: $about-bright-text
+    font-family: $std-font
+    margin: 1.3vh 15.45vw
+    border-radius: .5rem
+    padding: 2.34rem 4.35vw
+
+    @include breakpoints.tablet
+        margin: 1.3vh 5.23vw
+
+    h4
+        @include mixins.main-title
+        margin: 0
+
+    .content
+        display: flex
+        justify-content: space-between
+        gap: 2.3vw
+
+        .text
+            max-width: 43.2rem
+            text-align: justify
+            text-justify: inter-word
+            
+            p
+                font-weight: 300
+                font-size: max(.88rem, .75vw)
+                letter-spacing: .02rem
+
+            .sign
+                font-size: .8rem
+                font-style: italic

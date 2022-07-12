@@ -1,7 +1,9 @@
 import Layout from '../components/Layout'
 import Welcome from '../components/Welcome'
+import GamesBar from '../components/GamesBar'
 
 const Home = () => {
+
   return (
     <>
       <Layout
@@ -11,6 +13,9 @@ const Home = () => {
       />
 
       <Welcome/>
+
+      <GamesBar title="Recomendados" icon="recommended"/>
+      <GamesBar title="Tendências" icon="trending"/>
     </>
   )
 }

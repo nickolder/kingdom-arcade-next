@@ -1,13 +1,84 @@
+@use 'breakpoints'
+@use 'mixins'
 @import 'variables'
 
-.scores 
-    padding-top: 6vh
-    margin: auto
+.page
+    display: flex
+    align-items: center
+    flex-direction: column
+    margin: 2.58rem 5.36vw
 
-    &_title
-        font-family: $std-font
-        font-weight: 600
-        color: $scores-dark-text
-        background-color: $scores-title-box
-        padding: .34rem 1.37rem
-        width: fit-content
+    .title
+        @include mixins.main-title
+
+    .content
+        display: flex
+        gap: 6.5vw
+        margin-top: 4.32rem
+
+        @include breakpoints.tablet
+            flex-direction: column-reverse
+            align-items: center
+            gap: 3  .43rem
+            margin-bottom: 2.12rem
+
+        &_scores
+            border: 1px solid $scores-bright-text
+            border-radius: .34rem
+            padding: 1.5rem
+
+        &_games
+            display: flex
+            flex-direction: column
+            align-items: center
+            width: max(18vw, 16.43rem)
+            background-color: $scores-games-bg
+            padding: 1.5rem
+            font-family: $alt-font
+            color: $scores-dark-text
+            border-radius: .34rem
+            box-shadow: 0px 0px 35px 15px rgba(0, 0, 0, .5)
+
+            @include breakpoints.tablet 
+                flex-direction: row
+                padding: .48rem
+                gap: 1.43rem
+
+            &_thumb
+                position: relative
+                width: 100%
+                aspect-ratio: 18 / 10
+
+            &_header
+                width: 80%
+                text-align: center
+                padding: .63rem 0
+                margin-bottom: .83rem
+                border-bottom: .06rem solid $scores-alt-text
+
+                @include breakpoints.tablet 
+                    border: none
+                    margin: 0
+                    text-align: left
+
+                &_title
+                    font-family: $std-font
+                    font-weight: 600
+                    font-size: 1.43em
+                    text-transform: uppercase
+
+                    @include breakpoints.tablet 
+                        font-size: 1.02em
+
+                &_category
+                    font-weight: 400
+                    font-size: 1.02em
+                    color: $scores-alt-text
+
+            &_description
+                text-align: center
+                font-size: max(.88em, .86vw)
+
+                @include breakpoints.tablet 
+                    display: none
+                

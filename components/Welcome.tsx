@@ -1,4 +1,6 @@
 import Image from "next/image"
+import Link from "next/link"
+
 import welcome_style from "../styles/Welcome.module.sass"
 
 const Welcome = () => {
@@ -15,8 +17,13 @@ const Welcome = () => {
                 </div>
 
                 <div className={welcome_style.welcome_info_buttons}>
-                    <button className={welcome_style.hyperlink_button}>Explorar</button>
-                    <button className={welcome_style.hyperlink_button}>Criar</button>
+                    <Link href="#">
+                        <button className={welcome_style.hyperlink_button}>Explorar</button>
+                    </Link>
+
+                    <Link href="/create">
+                        <button className={welcome_style.hyperlink_button}>Carregar</button>
+                    </Link>
                 </div>
             </div>
 

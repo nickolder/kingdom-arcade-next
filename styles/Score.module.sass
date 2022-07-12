@@ -8,44 +8,52 @@
     color: $score-bright-text
     padding: 2.3vh 0
 
-    &_position
+    &:not(:last-child)
+        border-bottom: .01rem solid rgba($score-bright-text, .1)
+
+    &:first-child
+        .position
+            color: $score-dark-text
+            background: $score-bright-text
+
+    .position
         display: flex
         justify-content: center
         align-items: center
         font-weight: 500
         font-family: $std-font
-        font-size: 1.48em
+        font-size: max(1.08em, 1.3vw)
+        border: .02rem solid $score-bright-text
         border-radius: 50%
         width: 2.14rem
         aspect-ratio: 1 / 1
-        border: .02rem solid $score-bright-text
-
-    &_info
+            
+    .info
         display: flex
-        gap: 1.38rem
+        gap: 1.38vw
         align-items: center
 
-        &_profile
+        .profile
             position: relative
-            width: 3.12rem
+            width: max(2.7vw, 2.42rem)
             aspect-ratio: 1 / 1
 
             img 
                 border-radius: 50%
 
-        &_names
+        .names
             display: flex
             flex-direction: column
 
             span
-                font-size: 1.13em
+                font-size: max(.98em, 1vw)
 
             small
                 font-size: .82em
                 color: darken($score-bright-text, 20%) 
 
-        &_score
+        .num
             font-family: $std-font
             font-weight: 600
-            font-size: 1.28em
+            font-size: max(1.08em, .98vw)
             padding: 0 1.48rem 

@@ -1,0 +1,90 @@
+@use 'breakpoints'
+@import 'variables'
+
+.container
+    display: flex
+    flex-direction: column
+    align-items: center
+    width: 25.6rem
+    font-family: $alt-font
+    margin: 4.56rem auto
+    background: $upload-bg
+    padding: 2.46rem 2.23rem
+    border-radius: .67rem
+
+    @include breakpoints.phone
+        width: 90vw
+
+    .title
+        color: $upload-title
+        text-transform: uppercase
+        font-weight: 500
+        font-size: 1.24rem
+
+    .description
+        padding: 1.45rem 0
+
+        p
+            margin: 0
+            font-size: .9em
+            
+            &:last-child
+                color: $upload-alt-color
+
+    .form  
+        display: flex
+        flex-direction: column 
+        gap: 1.35rem
+        width: 100%
+
+        &_title
+            margin-bottom: .45rem
+
+        .files 
+            display: flex
+            flex-direction: column
+            align-items: center
+            
+            input
+                font-family: $alt-font
+
+        .images
+            display: flex
+            flex-direction: column
+            align-items: center
+
+            .img_input
+                width: 70%
+                margin: auto
+                aspect-ratio: 18 / 10
+                background-color: rgba($upload-dark-text, .9)
+                border-radius: .45rem
+                cursor: pointer
+                position: relative
+
+                &:hover
+                    transition: .2s ease
+                    background-color: $upload-dark-text
+
+                .icon
+                    top: 30%
+                    left: 40%
+                    position: absolute
+                    width: 20%
+                    color: darken($upload-bright-text, 8%)
+                    opacity: .5
+
+        .submit
+            font-family: $std-font
+            font-size: .98rem
+            font-weight: 500
+            padding: .65rem
+            margin: .34rem 0
+            background: rgba($upload-alt-color, .5)
+            border: none
+            border-radius: .45rem
+            text-transform: uppercase
+
+            &:hover
+                cursor: pointer
+

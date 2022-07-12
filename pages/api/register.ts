@@ -25,15 +25,26 @@ export default async (
         })
     }
 
-    const userData = JSON.parse(req.body)
-    assert(userData, Signup)
+    const userData = req.body
 
-    const registeredUser = await prisma.users.create({
-        data: {
-            ...userData,
-            password: await bcrypt.hash(userData.password, 10),
-        }     
-    })
+    let errors = []
 
-    res.status(200).json(registeredUser)
+    try {
+        assert(userData, Signup)
+
+        const registeredUser = await prisma.users.create({
+            data: {
+                ...userData,
+                password: await bcrypt.hash(userData.password, 10),
+            }     
+        })
+
+    } catch (err: any) {
+        for (const failure of err.failures()) {
+            errors.push(failure)
+        }
+
+        return res.status(400).json(JSON.stringify(userData))
+    }
+
 }

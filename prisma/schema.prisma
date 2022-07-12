@@ -17,3 +17,18 @@ model Users {
   email String @unique
   password String
 }
+
+model Games {
+  id String @id @default(cuid())
+  name String @unique
+  description String
+  category Categories @relation(fields: [categoryId], references: [id])
+  categoryId String 
+}
+
+model Categories {
+  id String @id @default(cuid())
+  name String @unique
+  description String
+  games Games[]
+}

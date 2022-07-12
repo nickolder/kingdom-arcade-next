@@ -20,15 +20,31 @@ type UserType = {
 async function registerUser (user: UserType) {
     const res = await fetch('/api/register', {
         method: 'POST',
+        headers: {'Content-Type': 'applicarion/json'},
         body: JSON.stringify(user)
 
-    }).then(res => res.json())
+    }).then(async res  => { 
+        const response = await res.json() 
+
+        if (res.status === 400) {
+            const keys = response.map((err: { key: string }) => {
+                return err.key
+            })
+        } else if (res.status === 200) {
+            
+        }
+    })
+
 }
 
 async function authenticateUser (user: UserType) {
     const res = await fetch('/api/login', {
         method: 'POST',
+        headers: {'Content-Type': 'applicarion/json'},
         body: JSON.stringify(user)
+        
+    }).then(async res => {
+        const response = await res.json()
     })
 }
 

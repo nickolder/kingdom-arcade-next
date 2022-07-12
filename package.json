@@ -26,9 +26,11 @@
     "next": "12.2.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-youtube": "^9.0.3",
     "superstruct": "^0.16.0"
   },
   "devDependencies": {
+    "@types/jsonwebtoken": "^8.5.8",
     "@types/node": "^18.0.0",
     "@types/react": "18.0.14",
     "@types/react-dom": "18.0.5",
