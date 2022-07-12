@@ -1,3 +1,4 @@
+import { faTemperatureEmpty } from "@fortawesome/free-solid-svg-icons"
 import type { NextApiRequest, NextApiResponse } from "next"
 import { prisma } from "../../prisma/prisma"
 
@@ -20,26 +21,27 @@ export default async (
     const userData = req.body
 
     const authenticatedUser = await prisma.users.findUnique({
-        select: {
-            id: true,
-            username: true,
-            password: true,
-        },
-
         where: {
             username: userData.username,
         }
     })
 
     if (!authenticatedUser) 
-        return res.status(400).json('username')
+        return res.status(400).send(JSON.stringify('username'))
 
     const match = await bcrypt.compare(userData.password, authenticatedUser.password)
-    const acessToken = jwt.sign({ id: authenticatedUser.id, username: authenticatedUser.username}, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' })
+
+    const acessToken = jwt.sign({ 
+        id: authenticatedUser.id, 
+        name: authenticatedUser.name, 
+        username: authenticatedUser.username, 
+        email: authenticatedUser.email 
+
+    }, process.env.ACCESS_TOKEN_SECRET)
 
     if (!match) 
-        return res.status(400).json('password')
+        return res.status(400).send(JSON.stringify('password'))
 
-    return res.status(200).json({ acessToken: acessToken })
+    return res.status(200).send(JSON.stringify(acessToken))
 
 }

@@ -7,11 +7,21 @@ import UploadInput from "../components/UploadInput"
 
 import upload_style from "../styles/Upload.module.sass"
 
+import { useRef, useState } from "react"
+
 const Upload = () => {
     const inputParameters = [
         { title: 'Nome', type: 'text' },
         { title: 'Descrição', type: 'description' }
     ]
+
+    const imageInput = useRef<any>(null)
+    const [thumb, setThumb] = useState<any | null>(null)
+
+    function openImageInput () {
+        if (imageInput.current)
+            imageInput.current.click()
+    }
     
     return (
         <>
@@ -50,13 +60,19 @@ const Upload = () => {
                     <div className={upload_style.images}>
                         <section className={upload_style.form_title}>Thumbnail (18 x 10)</section>
                         
-                        <div className={upload_style.img_input}>
+                        <div className={upload_style.img_input} onClick={openImageInput} style={{backgroundImage: 'url(' + thumb + ')', backgroundSize: 'cover'}}>
                             <div className={upload_style.icon}>
                                 <FontAwesomeIcon icon={faCirclePlus}/>
                             </div>
                         </div>
 
-                        <input type="file" accept="image/png, image/jpeg, image/gif" hidden/>
+                        <input 
+                            ref={imageInput}
+                            type="file" 
+                            accept="image/png, image/jpeg, image/gif" 
+                            onChange={ e => setThumb((URL.createObjectURL(e.target.files![0]))) }
+                            hidden
+                        />
                     </div>
 
                     <button className={upload_style.submit}>Carregar</button>

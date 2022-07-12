@@ -17,11 +17,11 @@ const Welcome = () => {
                 </div>
 
                 <div className={welcome_style.welcome_info_buttons}>
-                    <Link href="#">
+                    <Link href="/explore">
                         <button className={welcome_style.hyperlink_button}>Explorar</button>
                     </Link>
 
-                    <Link href="/create">
+                    <Link href="/upload">
                         <button className={welcome_style.hyperlink_button}>Carregar</button>
                     </Link>
                 </div>

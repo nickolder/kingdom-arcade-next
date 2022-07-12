@@ -7,7 +7,7 @@ const ShortcutsDisplayer = () => {
         {
            name: 'Explorar',
            path: 'explore', 
-           route: '',
+           route: '/explore',
         },
 
         {

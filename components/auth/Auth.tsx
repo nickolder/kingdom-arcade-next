@@ -5,6 +5,7 @@ import { faCirclePlus } from "@fortawesome/free-solid-svg-icons"
 import auth_style from "../../styles/Auth.module.sass"
 
 import Image from "next/image"
+import {useRouter} from "next/router"
 import React, { useContext, useRef, useState } from "react"
 
 import AuthInput from "./AuthInput"
@@ -16,37 +17,6 @@ type UserType = {
     email?: string,
     password: string,
 } 
-
-async function registerUser (user: UserType) {
-    const res = await fetch('/api/register', {
-        method: 'POST',
-        headers: {'Content-Type': 'applicarion/json'},
-        body: JSON.stringify(user)
-
-    }).then(async res  => { 
-        const response = await res.json() 
-
-        if (res.status === 400) {
-            const keys = response.map((err: { key: string }) => {
-                return err.key
-            })
-        } else if (res.status === 200) {
-            
-        }
-    })
-
-}
-
-async function authenticateUser (user: UserType) {
-    const res = await fetch('/api/login', {
-        method: 'POST',
-        headers: {'Content-Type': 'applicarion/json'},
-        body: JSON.stringify(user)
-        
-    }).then(async res => {
-        const response = await res.json()
-    })
-}
 
 const Auth = () => {
 
@@ -62,6 +32,8 @@ const Auth = () => {
     const [selectedFile, setSelectedFile] = useState<any | null>(null)
 
     const [auth_on, setAuthOn] = useContext(ModalContext)
+
+    const router = useRouter()
 
     const authInputsData = [
         {
@@ -115,28 +87,29 @@ const Auth = () => {
         }
     }
 
-    function handleSubmit (e: any) {
+    async function authUser (operation :string, user :UserType)  {
+        await fetch('/api/' + operation, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(user)
+        }).then(async res => {
+            console.log(res.status)
+            switch (res.status) {
+                case 200:
+                    localStorage.setItem('token', await res.json())
+                    router.pathname !== '/' ? router.push('/') : router.reload()
+                    break
+
+                case 400:
+                    console.log(await res.json())
+                    break
+            }
+        })
+    }
+
+    async function handleSubmit (e: any) {
         e.preventDefault()
-        let user
-
-        if (!is_signin) {
-            user = {
-                name: name,
-                username: username,
-                email: email,
-                password: password,
-            }
-    
-            registerUser(user)
-
-        } else {
-            user = {
-                username: username,
-                password: password,
-            }
-
-            authenticateUser(user)
-        }
+        !is_signin ? authUser('register', {name, username, email, password}) : authUser('login', {username, password})
     }
 
     return (

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 
 import Image from "next/image"
 import Link from "next/link"
@@ -13,9 +13,11 @@ import { faUserCircle } from "@fortawesome/free-solid-svg-icons"
 
 import Modal from "../Modal"
 import ModalContext from "../../contexts/ModalContext"
+import AuthContext from "../../contexts/AuthContext"
 
 const Nav = () => {
     const [auth_on, setAuthOn] = useState(false)
+    const [authenticated, setAuthenticated] = useContext(AuthContext)
 
     const Auth = require('../auth/Auth').default
 
@@ -43,10 +45,17 @@ const Nav = () => {
 
             <div className={nav_style.buttons}>
                 <div className={nav_style.search_icon}><Image src="/../img/search-icon.svg" layout="fill"/></div>
-                <button className={nav_style.buttons_sign_in} onClick={() => setAuthOn(!auth_on)}>Entrar</button>
-                <div className={nav_style.buttons_alt_sign_in} onClick={() => setAuthOn(!auth_on)}>
-                    <FontAwesomeIcon icon={faUserCircle}/>
-                </div>
+                
+                { !authenticated ?
+                    <>
+                        <button className={nav_style.buttons_sign_in} onClick={() => setAuthOn(!auth_on)}>Entrar</button>
+                        <div className={nav_style.buttons_alt_sign_in} onClick={() => setAuthOn(!auth_on)}>
+                            <FontAwesomeIcon icon={faUserCircle}/>
+                        </div>
+                    </> :
+
+                    <Image src="/../public/img/stock.jpg" width="30px" height="30px" style={{borderRadius: '50%'}}/>
+                }
             </div>
         </nav>
 

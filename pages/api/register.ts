@@ -6,6 +6,7 @@ import isEmail from 'isemail'
 import { prisma } from "../../prisma/prisma"
 
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 const Signup = object({
     name: size(string(), 2, 30),
@@ -39,12 +40,22 @@ export default async (
             }     
         })
 
+        const acessToken = jwt.sign({ 
+            id: registeredUser.id, 
+            name: registeredUser.name, 
+            username: registeredUser.username, 
+            email: registeredUser.email 
+
+        }, process.env.ACCESS_TOKEN_SECRET)
+
+        return res.status(200).send(JSON.stringify(acessToken))
+
     } catch (err: any) {
         for (const failure of err.failures()) {
             errors.push(failure)
         }
 
-        return res.status(400).json(JSON.stringify(userData))
+        return res.status(400).send(JSON.stringify(errors))
     }
 
 }
